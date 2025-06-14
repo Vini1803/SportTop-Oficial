@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportTop</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Resetando alguns estilos padrão */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilos para o corpo da página */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+            background-color: #f8f9fa; /* Lighter background */
+            color: #343a40; /* Darker text for readability */
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Cabeçalho */
+        header {
+          display: flex;
+            align-items: center;
+            background-color: #343a40;
+            color: #f8f9fa;
+            padding: 25px 20px;
+            position: relative;
+            flex-direction: column; /* Stack title and filters */
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap; /* Allow items to wrap */
+        }
+
+        header .logo-container {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        header .logo {
+            height: 70px; /* Increased logo size */
+            width: auto;
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            display: inline-block; /* Permite aplicar padding e background */
+            background-color: var(--accent-color); /* Cor de fundo para o "balão" */
+            border-radius: 100px; /* Arredondamento */
+            transition: background-color 0.3s ease; /* Transição suave */
+        }
+
+        header h1 {
+            font-size: 2.8em; /* Larger title */
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+            flex-grow: 1; /* Allow title to take available space */
+            text-align: center;
+        }
+
+        /* Menu de navegação */
+        nav {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 25px; /* Spacing between menu items */
+        }
+
+        nav ul li a {
+            color: #f8f9fa;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em; /* Slightly larger font */
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #007bff; /* Highlight on hover */
+        }
+
+        /* Conteúdo principal */
+        main {
+            flex: 1;
+            padding: 40px 20px; /* More padding */
+            max-width: 1200px; /* Max width for content */
+            margin: 0 auto; /* Center content */
+        }
+
+        .hero-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e2e6ea; /* Light grey background for hero */
+            padding: 60px 20px; /* More padding */
+            border-radius: 15px; /* Rounded corners */
+            margin-bottom: 40px; /* Space below hero */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Soft shadow */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            gap: 30px;
+        }
+
+        .hero-content {
+            max-width: 50%;
+            text-align: left;
+            flex: 1 1 45%; /* Flex grow and shrink, base width 45% */
+            min-width: 300px; /* Minimum width for content */
+        }
+
+        .hero-content h2 {
+            font-size: 3.5em; /* Large heading */
+            color: #212529;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.3em;
+            color: #495057;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #007bff; /* Primary blue */
+            color: #ffffff;
+            padding: 15px 35px; /* Larger button */
+            border-radius: 8px; /* Rounded button */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        .hero-image {
+            max-width: 45%;
+            flex: 1 1 45%; /* Flex grow and shrink, base width 45% */
+            min-width: 300px; /* Minimum width for image */
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .products-showcase {
+            margin-bottom: 40px;
+        }
+
+        .products-showcase h2 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #343a40;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .products-showcase h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: #007bff;
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+            gap: 30px; /* Spacing between products */
+            justify-content: center;
+        }
+
+        .produto, .produto-left {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .produto:hover, .produto-left:hover {
+            transform: translateY(-8px); /* Lift effect on hover */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .produto img, .produto-left img {
+            max-width: 100%;
+            height: 200px; /* Fixed height for images */
+            object-fit: cover; /* Cover the area, crop if necessary */
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .produto h3, .produto-left h3 {
+            font-size: 1.8em;
+            color: #212529;
+            margin-bottom: 10px;
+        }
+
+        .produto p, .produto-left p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 15px;
+            flex-grow: 1; /* Allow description to take space */
+        }
+
+        .produto .price, .produto-left .price {
+            font-size: 1.6em;
+            color: #007bff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .produto button, .produto-left button {
+            background-color: #28a745; /* Green for buy button */
+            color: #ffffff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .produto button:hover, .produto-left button:hover {
+            background-color: #218838; /* Darker green on hover */
+            transform: translateY(-2px);
+        }
+
+        .about-us-section {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #f1f3f5;
+            border-radius: 15px;
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .about-us-section h2 {
+            font-size: 2.5em;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        .about-us-section p {
+            font-size: 1.1em;
+            color: #495057;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #343a40;
+            color: #f8f9fa;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: auto; /* Push footer to the bottom */
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding-top: 80px; /* Add space for logo/nav on top */
+            }
+
+            header .logo-container {
+                position: static;
+                transform: none;
+                margin-bottom: 15px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            nav {
+                position: static;
+                transform: none;
+                margin-top: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content, .hero-image {
+                max-width: 100%;
+                flex: 1 1 100%;
+            }
+
+            .hero-content h2 {
+                font-size: 2.5em;
+            }
+
+            .hero-content p {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            .produto, .produto-left {
+                padding: 20px;
+            }
+
+            .produto h3, .produto-left h3 {
+                font-size: 1.5em;
+            }
+
+            .produto .price, .produto-left .price {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container" onclick="toggleMenu()">
+            <img src="Logo.jpeg" alt="Logo SportTop" class="logo">
+        </div>
+        <h1>SportTop</h1>
+        <nav id="menu">
+            <ul>
+                <li><a href="inicial.html">Home</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="sobre_nós.html">Sobre Nós</a></li>
+                <li><a href="compra.html">Carrinho de Compras</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h2>O Esporte Encontra o Estilo na SportTop</h2>
+                <p>Encontre os melhores artigos esportivos e roupas casuais para o seu dia a dia e suas atividades.</p>
+                <a href="produtos.html" class="cta-button">Ver Produtos</a>
+            </div>
+            <div class="hero-image">
+                <img src="jogador.png" alt="Atleta correndo">
+            </div>
+        </section>
+
+        <section class="products-showcase">
+            <h2>Nossos Produtos Mais Vendidos</h2>
+            <div class="product-grid">
+                <div class="produto"
+                    data-name="Tênis de Corrida UltraBoost"
+                    data-description="Tênis de alta performance para a pratica do volei, com amortecimento responsivo e suporte superior."
+                    data-price="699.99"
+                    data-image="tenisvolei-removebg-preview.png"
+                    data-size="40">
+                    <img src="tenisvolei.png" alt="Tênis de Corrida UltraBoost">
+                    <h3>Tênis de Volêi</h3>
+                    <p>Tênis de alta performance.</p>
+                    <div class="price">R$ 699,99</div>
+                    <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="produto"
+                    data-name="Camiseta Dry-Fit Pro"
+                    data-description="Camiseta com alta tecnologia, ideal para treinos e jogos, mantém o corpo seco e confortável."
+                    data-price="129.90"
+                    data-image="milan.jpg"
+                    data-size="M">
+                    <img src="milan.jpg" alt="Camiseta Dry-Fit Pro">
+                    <h3>Camiseta Milan</h3>
+                    <p>Camiseta Milan, ideal para treinos e jogos.</p>
+                    <div class="price">R$ 129,90</div>
+                    <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="produto"
+                    data-name="Shorts de Treino Nike"
+                    data-description="Shorts leves e flexíveis, perfeitos para qualquer tipo de exercício."
+                    data-price="89.90"
+                    data-image="Short azul.jpeg"
+                    data-size="G">
+                    <img src="Short azul.jpeg" alt="Shorts de Treino Nike">
+                    <h3>Shorts de Treino Nike</h3>
+                    <p>Shorts leves e flexíveis, perfeitos para qualquer tipo de exercício.</p>
+                    <div class="price">R$ 89,90</div>
+                    <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="produto"
+                    data-name="Camisa Real"
+                    data-description="Camisa oficial do Real Madrid, feita com tecido respirável e design moderno."
+                    data-price="199.90"
+                    data-image="Camisa Real.jpg"
+                    data-size="Não aplicável">
+                    <img src="Camisa Real.jpg" alt="Garrafa Térmica Sport">
+                    <h3>Camisa oficial do Real Madrid</h3>
+                    <p>Camisa oficial do Real Madrid, feita com tecido respirável e design moderno.</p>
+                    <div class="price">R$ 79,99</div>
+                    <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="produto"
+                    data-name="Bola de Futebol Top"
+                    data-description="Bola de futebol profissional, ideal para jogos e treinos, com excelente controle e durabilidade."
+                    data-price="89.90"
+                    data-image="bolafut.jpg"
+                    data-size="Não aplicável">
+                    <img src="futecopa1.png" alt="Garrafa Térmica Sport">
+                    <h3>Bola de Futebol Oficial da Copa 2022</h3>
+                    <p>Bola de futebol profissional, ideal para jogos e treinos, com excelente controle e durabilidade.</p>
+                    <div class="price">R$ 89,90</div>
+                    <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+            </div>
+
+                <div class="produto"
+                    data-name="Luvas de Boxe profissionais"
+                    data-description="Luvas de boxe profissionais, com acolchoamento extra para maior proteção e conforto."
+                    data-price="199.90"
+                    data-image="Luva Boxe.jpeg"
+                    data-size="Não aplicável">
+                    <img src="Luva Boxe.jpeg" alt="Garrafa Térmica Sport">
+                    <h3>Luvas de Boxe profissionais</h3>
+                    <p>Luvas de boxe profissionais, com acolchoamento extra para maior proteção e conforto.</p>
+                    <div class="price">R$ 199,90</div>
+                    <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+                </div>
+        </section>
+
+        <section class="about-us-section">
+            <h2>Quem Somos</h2>
+            <p>A SportTop é mais do que uma loja; é o seu parceiro em cada jornada esportiva. Nascemos da paixão por esporte e estilo de vida ativo, com a missão de oferecer os melhores produtos que combinam alta performance, conforto e design moderno. Nossa seleção é cuidadosamente curada, garantindo que você tenha acesso ao que há de mais inovador e de qualidade no mercado.</p>
+            <p>Seja você um atleta profissional ou alguém que busca um estilo de vida mais saudável, a SportTop tem o que você precisa para alcançar seus objetivos com confiança e estilo. Explore nosso catálogo e descubra a diferença de vestir e usar SportTop.</p>
+            <a href="sobre_nós.html" class="cta-button">Saiba Mais</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SportTop. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+
+        // Função para adicionar produto ao carrinho
+        function addToCart(element) {
+            const productDiv = element.closest('.produto') || element.closest('.produto-left');
+            const name = productDiv.dataset.name;
+            const description = productDiv.dataset.description;
+            const price = parseFloat(productDiv.dataset.price);
+            let image = productDiv.dataset.image;
+            const imgTag = productDiv.querySelector('img');
+            if (imgTag && imgTag.src) {
+                image = imgTag.src;
+            }
+            const size = productDiv.dataset.size || 'Não aplicável';
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const existingProductIndex = cart.findIndex(item => item.name === name && item.size === size);
+
+            if (existingProductIndex > -1) {
+                cart[existingProductIndex].quantity += 1;
+            } else {
+                cart.push({ name, description, price, image, size, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${name} (${size}) adicionado ao carrinho!`);
+        }
+    </script>
+</body>
+</html>

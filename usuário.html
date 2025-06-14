@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportTop - Meu Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variáveis de cor (se for usar as mesmas do seu site principal) */
+        :root {
+            --primary-color: #6D4C41; /* Marrom aconchegante */
+            --secondary-color: #8D6E63; /* Marrom mais claro */
+            --accent-color: #A1887F; /* Tom de marrom para acentos */
+            --text-color: #3e2723; /* Marrom escuro para texto */
+            --light-bg: #EFEBE9; /* Fundo claro */
+            --white: #FFFFFF;
+        }
+
+        /* Resetting default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Cabeçalho (copiado do seu index.html ou produtos.html) */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header .logo {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: var(--accent-color);
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        header .logo:hover {
+            background-color: var(--secondary-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Menu responsivo */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                right: 20px;
+                background-color: var(--primary-color);
+                width: 180px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                padding: 10px 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            nav ul li:last-child {
+                border-bottom: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+        /* Fim do cabeçalho */
+
+        /* Estilos da página de perfil */
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .profile-container {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .profile-header h2 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            margin: 0 auto 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Garante que a imagem não saia do círculo */
+            border: 4px solid var(--accent-color);
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Faz a imagem preencher o espaço sem distorcer */
+            display: none; /* Oculta até que uma imagem seja carregada */
+        }
+
+        .profile-photo i.fa-user {
+            font-size: 4em;
+            color: #b0b0b0;
+        }
+
+        .profile-photo input[type="file"] {
+            display: none; /* Esconde o input de arquivo padrão */
+        }
+
+        .profile-photo label {
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: var(--text-color);
+            font-size: 0.9em;
+        }
+
+        .profile-info {
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        .profile-info p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-info p strong {
+            color: var(--secondary-color);
+            min-width: 90px; /* Alinha os dois pontos */
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .profile-info p i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .logout-button {
+            background-color: #dc3545; /* Vermelho para logout */
+            color: var(--white);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: auto; /* Empurra o rodapé para baixo */
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="inicial.html" class="logo">SportTop</a>
+        <nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul id="menu">
+                <li><a href="inicial.html">Home</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="sobre_nós.html">Sobre Nós</a></li>
+                <li id="user-profile-link-container" style="display: none;"><a href="usuario.html" id="user-profile-link"></a></li>
+                <li><a href="#" id="cart-icon"><i class="fas fa-shopping-cart"></i> <span id="cartCount">0</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="profile-container">
+            <div class="profile-header">
+                <h2>Meu Perfil</h2>
+            </div>
+            <div class="profile-photo" id="profilePhotoContainer">
+                <label for="profilePhotoUpload">
+                    <img id="uploadedPhoto" src="" alt="Foto de Perfil">
+                    <i class="fas fa-user" id="defaultUserIcon"></i>
+                    <span>Clique para adicionar foto</span>
+                </label>
+                <input type="file" id="profilePhotoUpload" accept="image/*">
+            </div>
+            <div class="profile-info">
+                <p><i class="fas fa-user-circle"></i> <strong>Usuário:</strong> <span id="profile-username"></span></p>
+                <p><i class="fas fa-phone"></i> <strong>Telefone:</strong> <span id="profile-phone"></span></p>
+                <p><i class="fas fa-id-card"></i> <strong>CPF:</strong> <span id="profile-cpf"></span></p>
+            </div>
+            <button class="logout-button" onclick="logout()">Sair</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 SportTop. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const usersKey = 'sporttop_users';
+        const loggedInUserKey = 'loggedInUser';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const usernameSpan = document.getElementById('profile-username');
+            const phoneSpan = document.getElementById('profile-phone');
+            const cpfSpan = document.getElementById('profile-cpf');
+            const uploadedPhoto = document.getElementById('uploadedPhoto');
+            const defaultUserIcon = document.getElementById('defaultUserIcon');
+            const profilePhotoUpload = document.getElementById('profilePhotoUpload');
+            const profilePhotoContainer = document.getElementById('profilePhotoContainer');
+
+            const loggedInUsername = localStorage.getItem(loggedInUserKey);
+
+            if (!loggedInUsername) {
+                // Se não há usuário logado, redireciona para a página de login
+                alert('Você precisa estar logado para acessar esta página.');
+                window.location.href = 'index.html';
+                return; // Impede que o restante do script execute
+            }
+
+            const users = JSON.parse(localStorage.getItem(usersKey)) || {};
+            const currentUser = users[loggedInUsername];
+
+            if (currentUser) {
+                usernameSpan.textContent = loggedInUsername;
+                phoneSpan.textContent = currentUser.phone || 'Não informado';
+                cpfSpan.textContent = currentUser.cpf || 'Não informado';
+
+                // Carrega a foto de perfil se existir
+                const storedPhoto = localStorage.getItem(`profile_photo_${loggedInUsername}`);
+                if (storedPhoto) {
+                    uploadedPhoto.src = storedPhoto;
+                    uploadedPhoto.style.display = 'block';
+                    defaultUserIcon.style.display = 'none';
+                    profilePhotoContainer.querySelector('span').style.display = 'none'; // Oculta o texto "Clique para adicionar foto"
+                } else {
+                    uploadedPhoto.style.display = 'none';
+                    defaultUserIcon.style.display = 'block';
+                    profilePhotoContainer.querySelector('span').style.display = 'block';
+                }
+            } else {
+                // Caso o usuário logado não seja encontrado nos dados (situação rara)
+                alert('Erro ao carregar dados do usuário. Por favor, faça login novamente.');
+                localStorage.removeItem(loggedInUserKey); // Limpa o status de login
+                window.location.href = 'index.html';
+            }
+
+            // Lógica para upload e exibição da foto de perfil
+            profilePhotoUpload.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        uploadedPhoto.src = e.target.result;
+                        uploadedPhoto.style.display = 'block';
+                        defaultUserIcon.style.display = 'none';
+                        profilePhotoContainer.querySelector('span').style.display = 'none'; // Oculta o texto
+                        // Salva a imagem no localStorage (data URL)
+                        localStorage.setItem(`profile_photo_${loggedInUsername}`, e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        function logout() {
+            localStorage.removeItem(loggedInUserKey); // Remove o usuário logado
+            localStorage.removeItem('cart'); // Opcional: limpar carrinho ao deslogar
+            alert('Você foi desconectado.');
+            window.location.href = 'index.html'; // Redireciona para a página de login
+        }
+
+        // Lógica do menu responsivo (copiado do seu header)
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.getElementById('menu').classList.toggle('show');
+        });
+        // Lógica do carrinho (apenas o update da UI, sem funcionalidade de adicionar/remover aqui)
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        function updateCartUI() {
+            const cartCountElement = document.getElementById('cartCount');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountElement.textContent = totalItems;
+            if (totalItems > 0) {
+                cartCountElement.style.display = 'flex';
+            } else {
+                cartCountElement.style.display = 'none';
+            }
+        }
+        updateCartUI(); // Chama ao carregar a página
+    </script>
+</body>
+</html>

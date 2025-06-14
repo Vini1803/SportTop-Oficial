@@ -3,289 +3,454 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportTop</title>
+    <title>SportTop - Produtos</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Resetando alguns estilos padrão */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Estilos para o corpo da página */
         body {
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Garante que a altura mínima será 100% da tela */
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
             line-height: 1.6;
         }
 
-        /* Cabeçalho */
         header {
             display: flex;
-            justify-content: center; /* Centraliza todo o conteúdo do cabeçalho */
-            align-items: center; /* Alinha verticalmente o conteúdo */
-            background-color: #333;
-            color: white;
-            padding: 20px;
+            align-items: center;
+            background-color: #343a40;
+            color: #f8f9fa;
+            padding: 25px 20px;
             position: relative;
-            flex-direction: column;
-        }
-
-        header h1 {
-            font-size: 36px;
-        }
-
-        /* Barra de pesquisa e filtro */
-        .filtro-pesquisa {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 10px;
-        }
-
-        .filtro-pesquisa select, .filtro-pesquisa input[type="text"] {
-            padding: 8px;
-            font-size: 16px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        /* Seção de destaque */
-        .destaque {
-            background-color: #f9f9f9;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .destaque h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .destaque-produto {
-            display: inline-block;
-            background-color: white;
-            padding: 20px;
-            width: 300px;
+            flex-direction: column; /* Stack title and filters */
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap; /* Allow items to wrap */
+
         }
 
-        .destaque-produto img {
-            width: 100%;
-            height: auto;
-        }
-
-        .destaque-produto h3 {
-            font-size: 22px;
-            margin-top: 15px;
-        }
-
-        .destaque-produto p {
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        .destaque-produto a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
-            text-decoration: none;
-        }
-
-        .destaque-produto a:hover {
-            background-color: #555;
-        }
-
-        /* Seção de produtos */
-        .produtos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            flex-grow: 1; /* Faz o conteúdo de produtos crescer e ocupar o espaço disponível */
-        }
-
-        .produto {
-            background-color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .produto img {
-            width: 100%;
-            height: auto;
-        }
-
-        .produto h3 {
-            font-size: 18px;
-            margin-top: 15px;
-        }
-
-        .produto a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 16px;
-            background-color: #333;
-            color: white;
-            text-decoration: none;
-        }
-
-        .produto a:hover {
-            background-color: #555;
-        }
-
-        /* Rodapé */
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            /* Isso garante que o rodapé ficará no fundo */
-        }
-
-        .menu {
-            display: none; /* Oculta o menu inicialmente */
+        header .logo-container {
             position: absolute;
-            top: 80px; /* Coloca o menu logo abaixo da logo */
             left: 20px;
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .menu a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            margin: 5px 0;
-        }
-
-        .menu a:hover {
-            background-color: #444;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
         }
 
         header .logo {
-            position: absolute;
-            left: 20px; /* Coloca a logo à esquerda */
-            border-radius: 50%; /* Torna a logo redonda */
-            overflow: hidden; /* Garante que a imagem se ajuste ao formato redondo */
-            width: 60px; /* Define o tamanho da logo */
-            height: 60px; /* Define o tamanho da logo */
-            cursor: pointer; /* Muda o cursor para indicar que é clicável */
+            height: 70px; /* Increased logo size */
+            width: auto;
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            display: inline-block; /* Permite aplicar padding e background */
+            background-color: var(--accent-color); /* Cor de fundo para o "balão" */
+            border-radius: 100px; /* Arredondamento */
+            transition: background-color 0.3s ease; /* Transição suave */
         }
 
-        header .logo img {
+        header h1 {
+            font-size: 2.8em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            flex-grow: 1;
+            text-align: center;
+            margin-bottom: 20px; /* Space between title and filters */
+        }
+
+        nav {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: #f8f9fa;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #007bff;
+        }
+
+        .filters {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
             width: 100%;
-            height: 100%;
-            object-fit: cover; /* Faz a imagem se ajustar ao contorno circular */
+            max-width: 800px;
+            margin-top: 10px; /* Space from header title */
+            flex-wrap: wrap; /* Allow filters to wrap */
+        }
+
+        .filters label {
+            font-weight: bold;
+            color: #f8f9fa;
+            margin-right: 5px;
+        }
+
+        .filters select,
+        .filters input[type="text"] {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            font-size: 1em;
+            background-color: #ffffff;
+            color: #343a40;
+            flex-grow: 1; /* Allow input to grow */
+            min-width: 150px; /* Minimum width for inputs */
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            max-width: 1200px;  /* Alterado de 100px para 1200px */
+            margin: 0 auto;
+            width: 100%;  /* Adicionado para garantir largura total */
+            display: flex;
+            justify-content: center;}
+
+    .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajustado para 280px */
+            gap: 24px;
+            width: 100%;  /* Adicionado */
+            padding: 0 20px;
+            justify-items: center; /* Centraliza os itens na grade */
+        }
+
+        .produto {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 45px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .produto:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .produto img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .produto h3 {
+            font-size: 1.8em;
+            color: #212529;
+            margin-bottom: 10px;
+        }
+
+        .produto p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .produto .price {
+            font-size: 1.6em;
+            color: #007bff;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .produto button {
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .produto button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #f8f9fa;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: auto;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                padding-top: 80px;
+            }
+
+            header .logo-container {
+                position: static;
+                transform: none;
+                margin-bottom: 15px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            nav {
+                position: static;
+                transform: none;
+                margin-top: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .filters {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            .produto {
+                padding: 20px;
+            }
+            .produto h3 {
+                font-size: 1.5em;
+            }
+            .produto .price {
+                font-size: 1.4em;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo" id="logo" onclick="toggleMenu()">
-            <img src="Logo.jpeg" alt="Logo SportTop">
+        <div class="logo-container" onclick="toggleMenu()">
+            <img src="Logo.jpeg" alt="Logo SportTop" class="logo">
         </div>
-        <h1>SportTop</h1>
-        <div class="filtro-pesquisa">
-            <select id="filtroCategoria">
-                <option value="">Todas as Categorias</option>
-                <option value="joelheira">Joelheiras</option>
-                <option value="calçados">Tênis</option>
-                <option value="bola">Bolas</option>
-                <option value="camisa">Camisa</option>
-                </select>
-            <input type="text" id="pesquisa" placeholder="Pesquisar produto...">
-        </div>
-        <div class="menu" id="menu">
-            <a href="index.html">Home</a>
-            <a href="sobre_nos.html">Sobre Nós</a>
+        <h1>SportTop - Produtos</h1>
+        <nav id="menu">
+           <ul>
+                <li><a href="inicial.html">Home</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="sobre_nós.html">Sobre Nós</a></li>
+                <li><a href="compra.html">Carrinho de Compras</a></li>
+            </ul>
+        </nav>
+        <div class="filters">
+            <label for="filtro-categoria">Filtrar por Categoria:</label>
+            <select id="filtro-categoria">
+                <option value="todos">Todos</option>
+                <option value="tenis">Tênis</option>
+                <option value="roupas">Roupas</option>
+                <option value="acessorios">Acessórios</option>
+                <option value="artigo">Artigos de Esporte</option>
+            </select>
+
+            <label for="pesquisa">Pesquisar:</label>
+            <input type="text" id="pesquisa" placeholder="Nome do produto...">
         </div>
     </header>
 
-    <section class="destaque">
-        <h1>Produtos</h1>
-    </section>
+    <main>
+        <section class="product-grid">
+            <div class="produto"
+                data-name="Prancha de Ski Pro"
+                data-description="Prancha de ski profissional, ideal para competições e aventuras na neve."
+                data-price="899.99"
+                data-image="Prancha Ski.jpeg"
+                data-category="artigo"
+                data-size="40">
+                <img src="Prancha Ski.jpeg" alt="Prancha de Ski Pro">
+                <h3>Prancha de Ski Pro</h3>
+                <p>Prancha de ski profissional, ideal para competições.</p>
+                <div class="price">R$ 899,99</div>
+                <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+            </div>
 
-    <section class="produtos" id="listaDeProdutos">
-        <div class="produto" data-categoria="joelheira" data-nome="Joelheira Kanxa Futsal">
-            <img src="joelheira_kanxa_futsal_373_1_20201213213549-removebg-preview.png" alt="Joelheira Kanxa Futsal">
-            <h3>Joelheira Kanxa Futsal</h3>
-            <a href="https://www.magazineluiza.com.br/joelheira-esportiva-volei-futsal-skate-handball-ante-impacto-ajustavel-unissex-pisste/p/jdgj6jg0ah/es/jlps/?utm_source=google&utm_medium=cpc&utm_campaign=google_eco_apl_pro_app_none_none_none_none-geral-catalogoapp&utm_term=76792&utm_content=catalogoapp_con_amp_catalogogoogle_cat_tod_none&partner_id=76792&seller_id=dgplace&srsltid=AfmBOoodExrhHEmiRyWLK_XNo0A19epQfcjtDdDOkD5g7jCiMRirzVRQNYo">Comprar</a>
-        </div>
-        <div class="produto" data-categoria="calçados" data-nome="Tênis de Vôlei Aesthetic Pierre">
-            <img src="tenisvolei-removebg-preview.png" alt="Tênis de Vôlei Aesthetic Pierre">
-            <h3>Tênis de Vôlei Aesthetic Pierre</h3>
-            <a href="https://pasaler.com/products/tenis-de-volei-aesthetic-pierre-respiravel-e-antiderrapante?currency=BRL&variant=43857286725811&utm_source=google&utm_medium=cpc&utm_campaign=Google%20Shopping&stkn=112749bb28e4">Comprar</a>
-        </div>
-        <div class="produto" data-categoria="bola" data-nome="Bola de Futebol Campo Oficial">
-            <img src="bolafut.jpg" alt="Bola de Futebol Campo Oficial">
-            <h3>Bola de Futebol Campo Oficial</h3>
-            <a href="#">Comprar</a>
-        </div>
-        <div class="produto" data-categoria="camisa" data-nome="Camiseta Esportiva Masculina">
-            <img src="Camisa de Time.jpg" alt="Camiseta Esportiva Masculina">
-            <h3>Camiseta Esportiva Masculina</h3>
-            <a href="#">Comprar</a>
-        </div>
-        <div class="produto" data-categoria="calçados" data-nome="Chuteira de Futsal Profissional">
-            <img src="negocio.jpg" alt="Chuteira de Futsal Profissional">
-            <h3>Chuteira de Futsal Profissional</h3>
-            <a href="#">Comprar</a>
-        </div>
-        <div class="produto" data-categoria="camisa" data-nome="Camiseta Esportiva Masculina">
-            <img src="milan.jpg" alt="Camiseta Esportiva Masculina">
-            <h3>Chuteira de Futsal Profissional</h3>
-            <a href="#">Comprar</a>
-        </div>
-        <div class="produto" data-categoria="Bola" data-nome="Bola de Futebol da Copa de 2022">
-            <img src="futecopa1-removebg-preview.png" alt="Bola de Futebol da Copa de 2022">
-            <h3>Bola de Futebol Profissional</h3>
-            <a href="#">Comprar</a>
-        </div>
+            <div class="produto"
+                data-name="Short Braco Brasil"
+                data-description="Shorts de natação com estampa do Brasil, feitos de material resistente e confortável."
+                data-price="79.90"
+                data-image="Short Braco Brasil.jpeg"
+                data-category="roupas"
+                data-size="38">
+                <img src="Short Braco Brasil.jpeg" alt="Short Braco Brasil">
+                <h3>Short Braco Brasil</h3>
+                <p>Shorts de natação com estampa do Brasil, feitos de material resistente.</p>
+                <div class="price">R$ 79,90</div>
+                <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="produto"
+                data-name="Camisa de time do Milan"
+                data-description="Camiseta oficial do Milan, feita com tecido Dry-Fit para melhor desempenho."
+                data-price="129.90"
+                data-image="Camisa Milan.jpeg"
+                data-category="roupas"
+                data-size="M">
+                <img src="Camisa Milan.jpeg" alt="Camisa de time do Milan">
+                <h3>Camisa do Milan</h3>
+                <p>Camiseta oficial do Milan, feita com tecido respirável e confortável.</p>
+                <div class="price">R$ 129,90</div>
+                <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="produto"
+                data-name="Shorts de Treino Nike"
+                data-description="Shorts leves e flexíveis, perfeitos para qualquer tipo de exercício."
+                data-price="89.90"
+                data-image="https://via.placeholder.com/250x250?text=Shorts+Treino"
+                data-category="roupas"
+                data-size="G">
+                <img src="Short azul.jpeg" alt="Shorts de Treino Nike">
+                <h3>Shorts de Treino Flex</h3>
+                <p>Shorts leves e flexíveis, perfeitos para qualquer tipo de exercício.</p>
+                <div class="price">R$ 89,90</div>
+                <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="produto"
+                data-name="Raquete de Beach Tennis Pro"
+                data-description="Raquete de beach tennis profissional, leve e resistente, ideal para competições."
+                data-price="299.99"
+                data-image="Raquete beach tenis.jpeg"
+                data-category="artigo"
+                data-size="P">
+                <img src="Raquete beach tenis.jpeg" alt="Raquete de Beach Tennis Pro">
+                <h3>Raquete de Beach Tennis Pro</h3>
+                <p>Raquete de beach tennis profissional, leve e resistente.</p>
+                <div class="price">R$ 299,99</div>
+                <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="produto"
+                data-name="Joelheira Kanxa para volei"
+                data-description="Joelheira Kanxa, ideal para proteção durante jogos de vôlei."
+                data-price="79.99"
+                data-image="JoelheiraKanxaFutsal.png"
+                data-category="acessorios"
+                data-size="Não aplicável">
+                <img src="JoelheiraKanxaFutsal.png" alt="Joelheira Kanxa para volei">
+                <h3>Joelheira Kanxa</h3>
+                <p>Joelheira Kanxa, ideal para proteção durante jogos de vôlei.</p>
+                <div class="price">R$ 79,99</div>
+                <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="produto"
+                data-name="Prancha de Surf Pranha"
+                data-description="Prancha de surf Pranha, ideal para iniciantes e profissionais."
+                data-price="699.00"
+                data-image="Pranha Surf.jpeg"
+                data-category="artigo"
+                data-size="Não aplicável">
+                <img src="Pranha Surf.jpeg" alt="Prancha de Surf Pranha">
+                <h3>Prancha de Surf Pranha</h3>
+                <p>Prancha de surf Pranha, ideal para iniciantes e profissionais.</p>
+                <div class="price">R$ 699,00</div>
+                <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="produto"
+                data-name="Luva Goleiro Puma"
+                data-description="Luva de goleiro Puma, com tecnologia de aderência para melhor desempenho."
+                data-price="59.90"
+                data-image="Luva Goleiro Puma.png"
+                data-category="acessorios"
+                data-size="Não aplicável">
+                <img src="Luva Goleiro Puma.png" alt="Luva Goleiro Puma">
+                <h3>Luva Goleiro Puma</h3>
+                <p>Luva de goleiro Puma, com tecnologia de aderência para melhor desempenho.</p>
+                <div class="price">R$ 59,90</div>
+                <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+            </div>
+
+            <div class="produto"
+                data-name="Bola Mikasa"
+                data-description="Bola Mikasa, ideal para jogos de vôlei, com excelente durabilidade e controle."
+                data-price="299.90"
+                data-image="Bola Mikasa.jpg"
+                data-category="artigo
+                data-size="Não aplicável">
+                <img src="Bola Mikasa.jpg" alt="Bola Mikasa">
+                <h3>Bola Mikasa</h3>
+                <p>Bola Mikasa, ideal para jogos de vôlei, com excelente durabilidade e controle.</p>
+                <div class="price">R$ 299,90</div>
+                <button onclick="addToCart(this)">Adicionar ao Carrinho</button>
+            </div>
         </section>
+    </main>
 
     <footer>
-        <p>&copy; 2025 Loja de Esportes. Todos os direitos reservados.</p>
+        <p>&copy; 2025 SportTop. Todos os direitos reservados.</p>
     </footer>
 
     <script>
-        // Função para mostrar/ocultar o menu ao clicar na logo
         function toggleMenu() {
             const menu = document.getElementById('menu');
             menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const filtroCategoria = document.getElementById('filtroCategoria');
+            const filtroCategoria = document.getElementById('filtro-categoria');
             const pesquisaInput = document.getElementById('pesquisa');
-            const listaDeProdutos = document.getElementById('listaDeProdutos');
-            const produtos = listaDeProdutos.querySelectorAll('.produto');
+            const produtos = document.querySelectorAll('.produto');
 
             function filtrarProdutos() {
-                const categoriaSelecionada = filtroCategoria.value.toLowerCase();
+                const categoriaSelecionada = filtroCategoria.value;
                 const termoPesquisa = pesquisaInput.value.toLowerCase();
 
                 produtos.forEach(produto => {
-                    const categoriaProduto = produto.dataset.categoria.toLowerCase();
-                    const nomeProduto = produto.dataset.nome.toLowerCase();
+                    const categoriaProduto = produto.dataset.category;
+                    const nomeProduto = produto.dataset.name.toLowerCase();
 
-                    const correspondeCategoria = categoriaSelecionada === '' || categoriaProduto === categoriaSelecionada;
+                    const correspondeCategoria = (categoriaSelecionada === 'todos' || categoriaProduto === categoriaSelecionada);
                     const correspondePesquisa = nomeProduto.includes(termoPesquisa);
 
                     if (correspondeCategoria && correspondePesquisa) {
-                        produto.style.display = 'block';
+                        produto.style.display = 'flex';
                     } else {
                         produto.style.display = 'none';
                     }
@@ -295,6 +460,33 @@
             filtroCategoria.addEventListener('change', filtrarProdutos);
             pesquisaInput.addEventListener('input', filtrarProdutos);
         });
+
+        // Função para adicionar produto ao carrinho (duplicada para produtos.html)
+        function addToCart(element) {
+            const productDiv = element.closest('.produto');
+            const name = productDiv.dataset.name;
+            const description = productDiv.dataset.description;
+            const price = parseFloat(productDiv.dataset.price);
+            let image = productDiv.dataset.image;
+            const imgTag = productDiv.querySelector('img');
+            if (imgTag && imgTag.src) {
+                image = imgTag.src;
+            }
+            const size = productDiv.dataset.size || 'Não aplicável';
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const existingProductIndex = cart.findIndex(item => item.name === name && item.size === size);
+
+            if (existingProductIndex > -1) {
+                cart[existingProductIndex].quantity += 1;
+            } else {
+                cart.push({ name, description, price, image, size, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${name} (${size}) adicionado ao carrinho!`);
+        }
     </script>
 </body>
 </html>

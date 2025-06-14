@@ -3,280 +3,336 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SportTop</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Login / Cadastro - SportTop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Resetando alguns estilos padrão */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Estilos para o corpo da página */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
             line-height: 1.6;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Garante que a altura mínima será 100% da tela */
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 25px;
         }
 
-        /* Cabeçalho */
-        header {
-            display: flex;
-            justify-content: center; /* Centraliza todo o conteúdo do cabeçalho */
-            align-items: center; /* Alinha verticalmente o conteúdo */
-            background-color: #333;
-            color: white;
-            padding: 20px;
+        .login-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            font-size: 2.5em;
+            color: #343a40;
+            margin-bottom: 30px;
             position: relative;
         }
 
-        /* Logo Redonda */
-        header .logo {
-            position: absolute;
-            left: 20px; /* Coloca a logo à esquerda */
-            border-radius: 50%; /* Torna a logo redonda */
-            overflow: hidden; /* Garante que a imagem se ajuste ao formato redondo */
-            width: 60px; /* Define o tamanho da logo */
-            height: 60px; /* Define o tamanho da logo */
-            cursor: pointer; /* Muda o cursor para indicar que é clicável */
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+            position: relative;
         }
 
-        header .logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Faz a imagem se ajustar ao contorno circular */
-        }
-
-        /* Estilo do título */
-        header h1 {
-            font-size: 36px;
-            text-align: center;
-            font-weight: bold;
-            color: #ffffff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            letter-spacing: 1px;
-            margin-left: 80px; /* Ajusta o título para a direita, afastado da logo */
-        }
-
-        /* Menu (inicialmente oculto) */
-        .menu {
-            display: none; /* Oculta o menu inicialmente */
-            position: absolute;
-            top: 80px; /* Coloca o menu logo abaixo da logo */
-            left: 20px;
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .menu a {
+        .input-group label {
             display: block;
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            margin: 5px 0;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
         }
 
-        .menu a:hover {
-            background-color: #444;
-        }
-
-        /* Carrossel de Produtos (rolagem lateral) */
-        .product-carousel {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #fff;
-        }
-
-        .product-carousel h2 {
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        .carousel {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 10px;
-            scroll-behavior: smooth;
-        }
-
-        .produto {
-            flex: 0 0 auto;
-            text-align: center;
-            width: 250px;
-            background-color: #eee;
-            padding: 15px;
+        .input-group input[type="text"],
+        .input-group input[type="password"],
+        .input-group input[type="tel"], /* Adicionado */
+        .input-group input[type="number"] { /* Adicionado para CPF, embora text seja mais flexível */
+            width: calc(100% - 22px);
+            padding: 12px 10px;
+            border: 1px solid #ced4da;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
         }
 
-        .produto img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
+        .input-group input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            outline: none;
         }
 
-        .produto h3 {
-            font-size: 18px;
-            margin-top: 10px;
-        }
-
-        .produto a {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        .produto a:hover {
-            background-color: #555;
-        }
-
-        /* Seção de Produtos à Esquerda com Descrição */
-        .produtos {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .produto-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .produto-left img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .produto-left h3 {
-            font-size: 18px;
-            margin: 0;
+        .password-toggle {
+            position: absolute;
+            right: 30px;
+            top: 70%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6c757d;
+            font-size: 1.1em;
             padding: 5px;
+            user-select: none;
         }
 
-        .produto-left p {
-            font-size: 14px;
-            color: #666;
+        .password-toggle:hover {
+            color: #343a40;
         }
-        
-        /* Rodapé */
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            flex-grow: 1;
+            max-width: 180px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            margin-top: 25px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Estilos adicionais para o formulário de cadastro */
+        #register-form {
+            display: none; /* Inicia oculto */
+        }
+        #login-form {
+            display: block; /* Inicia visível */
+        }
+        .form-switcher {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        .form-switcher a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .form-switcher a:hover {
+            text-decoration: underline;
+        }
+
+
+        @media (max-width: 600px) {
+            .login-container {
+                padding: 30px;
+                margin: 0 15px;
+            }
+
+            .login-container h2 {
+                font-size: 2em;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Cabeçalho -->
-    <header>
-        <div class="logo" id="logo" onclick="toggleMenu()">
-            <img src="Logo.jpeg" alt="Logo SportTop">
-        </div>
-        <h1>SportTop</h1> 
-        <!-- Menu -->
-        <div class="menu" id="menu">
-            <a href="produtos.html">Produtos</a>
-            <a href="sobre_nos.html">Sobre Nós</a>
-        </div>
-    </header>
+    <div class="login-container">
+        <h2>Bem-vindo à SportTop!</h2>
 
-    <!-- Carrossel de Produtos -->
-    <section class="product-carousel">
-        <h2>Ofertas</h2>
-        <div class="carousel">
-            <div class="produto">
-                <img src="joelheira_kanxa_futsal_373_1_20201213213549-removebg-preview.png" alt="Produto 1">
-                <h3>Joelheira Kanxa</h3>
-                <a href="pagina_compra.html">Comprar</a>
+        <div id="login-form">
+            <div class="input-group">
+                <label for="login-username">Usuário</label>
+                <input type="text" id="login-username" placeholder="Digite seu usuário" required>
             </div>
-            <div class="produto">
-                <img src="tenisvolei-removebg-preview.png" alt="Produto 2">
-                <h3>Tênis de Vôlei</h3>
-                <a href="pagina_compra.html">Comprar</a>
-            </div>
-            <div class="produto">
-                <img src="bolasal-removebg-preview (1).png" alt="Produto 3">
-                <h3>Bola de Futsal</h3>
-                <a href="pagina_compra.html">Comprar</a>
-            </div>
-            <div class="produto">
-                <img src="bola-de-volei-mikasa-juvenil-vs220w-removebg-preview.jpg" alt="Produto 4">
-                <h3>Bola de Vôlei Mikasa Juvenil</h3>
-                <a href="pagina_compra.html">Comprar</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Seção de Produtos à Esquerda com Descrição -->
-    <section class="produtos">
-        <div class="produto-left">
-            <img src="futecopa1-removebg-preview.png" alt="Produto 5">
-            <div>
-                <h3>Bola de Futebol</h3>
-                <p>Alta qualidade para a prática do esporte.</p>
-                <a href="pagina_compra.html">Comprar</a>
+            <div class="input-group">
+                <label for="login-password">Senha</label>
+                <input type="password" id="login-password" placeholder="Digite sua senha" required>
+                <span class="password-toggle" id="toggleLoginPassword">
+                    <i class="fa-solid fa-eye"></i>
+                </span>
             </div>
-        </div>
-        <div class="produto-left">
-            <img src="Camisa de Time.jpg" alt="Produto 6">
-            <div>
-                <h3>Camisa de Time Real Madrid temp 24/25</h3>
-                <p>Camisa oficial de time, ideal para fãs.</p>
-                <a href="pagina_compra.html">Comprar</a>
-            </div>
-        </div>
-        <div class="produto-left">
-            <img src="milan.jpg" alt="Produto 7">
-            <div>
-                <h3>Camisa de Time Milan temp 25/26</h3>
-                <p>Camisa oficial do Milan, modelo 2024.</p>
-                <a href="pagina_compra.html">Comprar</a>
-            </div>
-        </div>
-        <div class="produto-left">
-            <img src="cori.jpg" alt="Produto 8">
-            <div>
-                <h3>Camisa de Time</h3>
-                <p>Camisa do Corinthians, ideal para torcedores.</p>
-                <a href="pagina_compra.html">Comprar</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; 2025 Loja de Esportes. Todos os direitos reservados.</p>
-    </footer>
+            <div class="btn-group">
+                <button class="btn" onclick="login()">Login</button>
+            </div>
+            <p class="form-switcher">Não tem uma conta? <a href="#" onclick="showRegisterForm()">Cadastre-se</a></p>
+        </div>
+
+        <div id="register-form">
+            <div class="input-group">
+                <label for="register-username">Novo Usuário</label>
+                <input type="text" id="register-username" placeholder="Escolha um nome de usuário" required>
+            </div>
+
+            <div class="input-group">
+                <label for="register-password">Nova Senha</label>
+                <input type="password" id="register-password" placeholder="Crie uma senha" required>
+                <span class="password-toggle" id="toggleRegisterPassword">
+                    <i class="fa-solid fa-eye"></i>
+                </span>
+            </div>
+
+            <div class="input-group">
+                <label for="register-phone">Telefone</label>
+                <input type="tel" id="register-phone" placeholder="(XX) XXXXX-XXXX" required>
+            </div>
+
+            <div class="input-group">
+                <label for="register-cpf">CPF</label>
+                <input type="text" id="register-cpf" placeholder="XXX.XXX.XXX-XX" required>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn" onclick="register()">Cadastrar</button>
+            </div>
+            <p class="form-switcher">Já tem uma conta? <a href="#" onclick="showLoginForm()">Fazer Login</a></p>
+        </div>
+
+
+        <div id="message" class="message" style="display: none;"></div>
+    </div>
 
     <script>
-        // Função para mostrar/ocultar o menu ao clicar na logo
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        // Chave para armazenar todos os usuários no localStorage
+        // Cada usuário será um objeto: { password: "...", phone: "...", cpf: "..." }
+        const usersKey = 'sporttop_users';
+        const loggedInUserKey = 'loggedInUser'; // Chave para o usuário atualmente logado
+
+        // Referências para os inputs de senha e seus toggles
+        const loginPasswordInput = document.getElementById('login-password');
+        const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+        const registerPasswordInput = document.getElementById('register-password');
+        const toggleRegisterPassword = document.getElementById('toggleRegisterPassword');
+
+        // Função para mostrar/esconder a senha para qualquer input
+        function setupPasswordToggle(inputElement, toggleElement) {
+            toggleElement.addEventListener('click', function () {
+                const type = inputElement.getAttribute('type') === 'password' ? 'text' : 'password';
+                inputElement.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+        }
+
+        // Configura os toggles para os dois campos de senha
+        setupPasswordToggle(loginPasswordInput, toggleLoginPassword);
+        setupPasswordToggle(registerPasswordInput, toggleRegisterPassword);
+
+
+        function showMessage(msg, type) {
+            const messageElement = document.getElementById('message');
+            messageElement.textContent = msg;
+            messageElement.className = `message ${type}`;
+            messageElement.style.display = 'block';
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 3000); // Esconde a mensagem após 3 segundos
+        }
+
+        function showRegisterForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+            document.getElementById('message').style.display = 'none'; // Limpa mensagens anteriores
+        }
+
+        function showLoginForm() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('message').style.display = 'none'; // Limpa mensagens anteriores
+        }
+
+        function login() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            let users = JSON.parse(localStorage.getItem(usersKey)) || {};
+
+            // Verifica se o usuário existe e a senha está correta
+            if (users[username] && users[username].password === password) {
+                // Se o login for bem-sucedido, armazena o nome de usuário logado
+                localStorage.setItem(loggedInUserKey, username);
+                showMessage('Login bem-sucedido! Redirecionando...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'inicial.html'; // Redireciona para a página inicial
+                }, 1500);
+            } else {
+                showMessage('Usuário ou senha incorretos.', 'error');
+            }
+        }
+
+        function register() {
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
+            const phone = document.getElementById('register-phone').value;
+            const cpf = document.getElementById('register-cpf').value;
+
+            let users = JSON.parse(localStorage.getItem(usersKey)) || {};
+
+            if (username.length < 3 || password.length < 3) {
+                showMessage('Usuário e senha devem ter pelo menos 3 caracteres.', 'error');
+                return;
+            }
+            if (phone.length < 10 || cpf.length < 11) { // Validação básica
+                showMessage('Por favor, insira um telefone e CPF válidos.', 'error');
+                return;
+            }
+
+            if (users[username]) {
+                showMessage('Usuário já existe. Tente outro nome de usuário.', 'error');
+            } else {
+                // Armazena todos os dados do usuário
+                users[username] = { password: password, phone: phone, cpf: cpf };
+                localStorage.setItem(usersKey, JSON.stringify(users));
+                showMessage('Cadastro realizado com sucesso! Agora você pode fazer login.', 'success');
+                // Limpa os campos após o cadastro
+                document.getElementById('register-username').value = '';
+                document.getElementById('register-password').value = '';
+                document.getElementById('register-phone').value = '';
+                document.getElementById('register-cpf').value = '';
+                showLoginForm(); // Volta para o formulário de login
+            }
         }
     </script>
 </body>
